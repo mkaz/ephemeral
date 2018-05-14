@@ -36,20 +36,25 @@ TWEPOCH
 `TWEPOCH` expects a date value in `YYYY-MM-DD` format
 
 
-### Run
+### Usage
 
-If you create `env.sh` file, you can do a test run using:
+1. See releases for binary downloads for Linux and Raspberry Pi.
+
+2. Create `env.sh` file, see `env.sh.sample`
+
+3. Test run
 
 ```
 $ source env.sh
 $ ephemeral --test
 ```
 
-### Schedule
+4. Remove `--test` flag when you're ready to delete away
 
-I run this program using cron on a schedule time. I create the above environment
-variables in a bash script called `env.sh` see env.sh.sample file in this repo.
-I souce env.sh prior to running in cron using"
+### Automate
+
+I run this program using cron on a schedule time running on a Raspberry Pi.
+Here is the cron entry which shows soucing env.sh prior to running.
 
 ```
 0 8 * * * . path/to/dir/env.sh; path/to/dir/ephemeral
@@ -67,11 +72,10 @@ $ go get
 $ go build
 ```
 
-#### Run on a Raspberry Pi
+##### Run on a Raspberry Pi
 
-I run this on a Raspberry Pi I always have running. The great thing about golang
-is its ability to target multiple architectures. You can do a cross-compile
-build for Raspberry Pi using:
+The great thing about golang is its ability to target multiple architectures.
+You can do a cross-compile build for Raspberry Pi using:
 
 `env GOOS=linux GOARCH=arm GOARM=5 go build`
 
