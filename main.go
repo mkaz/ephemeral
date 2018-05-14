@@ -77,7 +77,10 @@ func deleteFromTimeline(api *anaconda.TwitterApi, ageLimit time.Duration) {
 		}
 
 		if createdTime.Before(twepoch) {
-			log.Info("This tweet is before the twepoch...", twepoch)
+			log.WithFields(log.Fields{
+				"tweet":   t.Text,
+				"twepoch": twepoch,
+			}).Info("Tweet before the twepoch")
 			continue
 		}
 
@@ -89,6 +92,11 @@ func deleteFromTimeline(api *anaconda.TwitterApi, ageLimit time.Duration) {
 				}
 			}
 			log.Info("DELETED: Age - ", time.Since(createdTime).Round(1*time.Minute), " - ", t.Text)
+		} else {
+			log.WithFields(log.Fields{
+				"tweet":    t.Text[:45],
+				"ageLimit": ageLimit,
+			}).Info("Tweet within save window.")
 		}
 	}
 	log.Info("No more tweets to delete.")
