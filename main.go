@@ -94,7 +94,7 @@ func deleteFromTimeline(api *anaconda.TwitterApi, ageLimit time.Duration) {
 			log.Info("DELETED: Age - ", time.Since(createdTime).Round(1*time.Minute), " - ", t.Text)
 		} else {
 			log.WithFields(log.Fields{
-				"tweet":    t.Text[:45],
+				"tweet":    t.Text,
 				"ageLimit": ageLimit,
 			}).Info("Tweet within save window.")
 		}
